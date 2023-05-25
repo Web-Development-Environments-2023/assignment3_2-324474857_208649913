@@ -15,3 +15,7 @@ Recipes API need to add: Get Random Recipes
 Not in out API : /logout POST 
 About will be on frontend
 
+API: 
+GET & POST - /users/my-recipes
+GET /users/family-recipes
+Search - is external API 

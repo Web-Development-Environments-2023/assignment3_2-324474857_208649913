@@ -38,8 +38,8 @@ app.get("/",function(req,res)
 
 });
 
-// app.use(cors());
-// app.options("*", cors());
+app.use(cors());
+app.options("*", cors());
 
 const corsConfig = {
   origin: true,
