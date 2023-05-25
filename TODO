@@ -1,21 +1,11 @@
-Connect to remote DB
-What should we be able to do with the DB ?
-
-/Recipes POST (Optional)
-/ GET - Main page for a user 
-/recipe/search GET 
-Recipes API need to add: Search Recipes
-Recipes API need to add: Get Random Recipes
-
-/users/my-recipes GET
-/users/my-recipes POST
-/users/family-recipes GET
-/users/family-recipes POST
-
-Not in out API : /logout POST 
-About will be on frontend
-
 API: 
 GET & POST - /users/my-recipes
 GET /users/family-recipes
 Search - is external API 
+
+To Implement : 
+Recipes API need to add: Search Recipes
+Recipes API need to add: Get Random Recipes
+/ GET - Main page for a user 
+/users/family-recipes GET 
+
