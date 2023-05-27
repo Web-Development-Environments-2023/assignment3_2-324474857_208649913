@@ -46,7 +46,6 @@ async function searchRecipes(query, cuisine, diet, intolerances) {
         includeNutrition: false
       }
     });
-
     return response.data.results;
   } catch (error) {
     console.error(error);
@@ -55,7 +54,7 @@ async function searchRecipes(query, cuisine, diet, intolerances) {
 }
 
 /**
- * Get detailed information of a recipe
+ * Get preview information of a recipe
  * @param {*} recipe_id - ID of the recipe
  */
 async function getRecipeDetails(recipe_id) {
@@ -74,7 +73,32 @@ async function getRecipeDetails(recipe_id) {
   };
 }
 
+/**
+ * Get detailed information (more extensive than preview) of a recipe
+ * @param {*} recipe_id - ID of the recipe
+ */
+async function getFullRecipeDetails(recipe_id) {
+  let recipe_info = await getRecipeInformation(recipe_id);
+  let { id, title, readyInMinutes, image, aggregateLikes, vegan, vegetarian,
+     glutenFree, extendedIngredients, servings, instructions} = recipe_info.data;
+
+  return {
+    id: id,
+    title: title,
+    readyInMinutes: readyInMinutes,
+    image: image,
+    popularity: aggregateLikes,
+    vegan: vegan,
+    vegetarian: vegetarian,
+    glutenFree: glutenFree,
+    servings: servings,
+    extendedIngredients: extendedIngredients,
+    instructions: instructions
+  };
+}
+
 // Export the functions
 exports.getRecipeDetails = getRecipeDetails;
+exports.getFullRecipeDetails = getFullRecipeDetails;
 exports.searchRecipes = searchRecipes;
 exports.getRandomRecipes = getRandomRecipes;

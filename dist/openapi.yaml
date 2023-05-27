@@ -168,6 +168,8 @@ paths:
 
   /recipes:
     get:
+      tags:
+      - Recipes
       summary: Get random recipes, main page of the website
       responses:
         '200':
@@ -207,6 +209,8 @@ paths:
           description: recipeId is not exists
   /recipes/search:
     get:
+      tags:
+      - Recipes
       summary: Search for recipes
       parameters:
         - name: query

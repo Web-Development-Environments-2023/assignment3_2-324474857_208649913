@@ -1,9 +1,27 @@
-API: 
-GET & POST - /users/my-recipes
-GET /users/family-recipes
-Search - is external API 
 
-To Implement : 
+API Routes Status: 
+GET /alive - Working
+
+Recipes: 
+GET /recipes/{recipeId} - Working
+GET /recipes - Working
+GET /recipes/search - Working
+
+Auth: 
+POST /register -
+POST /login - 
+POST /logout - 
+
+Users: 
+GET /users/favorites - 
+POST /users/favorites - 
+GET /users/my-recipes - 
+POST /users/my-recipes - 
+GET /users/family-recipes - 
+
+
+ToDo Backend : 
+
 
 
 ToDo Frontend: 
