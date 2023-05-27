@@ -17,4 +17,21 @@ router.get("/:recipeId", async (req, res, next) => {
   }
 });
 
+router.get('/search', async (req,res,next) => {
+  try{
+    const query = req.query.query;
+    const intolerances = req.query.intolerances;
+    const diet = req.query.diet;
+    const cuisine = req.query.cuisine;
+    const search = await recipes_utils.searchRecipes(query, cuisine, diet, intolerances);
+    const response = []
+    for(let i = 0 ;i<search.length; i++){
+      response.push(await recipes_utils.getRecipeDetails(search[i].id));
+    }
+    res.status(200).send(res);
+  }catch(error){
+    next(error);
+  }
+})
+
 module.exports = router;

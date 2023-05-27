@@ -18,6 +18,37 @@ async function getRecipeInformation(recipe_id) {
     });
 }
 
+https://api.spoonacular.com/recipes/random?number=1
+async function getRecipeInformation(recipe_id) {
+    return await axios.get(`${api_domain}/random`, {
+        params: {
+            includeNutrition: false,
+            apiKey: process.env.spooncular_apiKey
+        }
+    });
+}
+
+
+
+async function searchRecipes(query, cuisine, diet, intolerances) {
+    try {
+      const response = await axios.get(`${api_domain}/complexSearch`, {
+        params: {
+          apiKey: process.env.spoonacular_apiKey,
+          query: query,
+          cuisine: cuisine,
+          diet: diet,
+          intolerances: intolerances,
+          includeNutrition: false
+        }
+      });
+      
+      return response.data.results;
+    } catch (error) {
+      console.error(error);
+      throw new Error('An error occurred while searching for recipes.');
+    }
+  }
 
 
 async function getRecipeDetails(recipe_id) {
