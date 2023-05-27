@@ -18,11 +18,10 @@ async function getRecipeInformation(recipe_id) {
     });
 }
 
-https://api.spoonacular.com/recipes/random?number=1
-async function getRecipeInformation(recipe_id) {
+async function getRandomRecipes(number) {
     return await axios.get(`${api_domain}/random`, {
         params: {
-            includeNutrition: false,
+            number: number,
             apiKey: process.env.spooncular_apiKey
         }
     });
@@ -71,6 +70,8 @@ async function getRecipeDetails(recipe_id) {
 
 
 exports.getRecipeDetails = getRecipeDetails;
+exports.searchRecipes = searchRecipes;
+exports.getRandomRecipes = getRandomRecipes;
 
 
 
