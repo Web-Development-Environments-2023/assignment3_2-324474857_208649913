@@ -146,6 +146,26 @@ paths:
           description: user is not authorized
       security:
       - cookieAuth: []
+  /users/family-recipes:
+    get:
+      tags:
+      - Users
+      summary: Return the user's family recipes
+      description: Get an array of recipes that are family recipes of specific user
+      responses:
+        "200":
+          description: data about the user's family recipes returned
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FamilyRecipe'
+        "401":
+          description: user is not authorized
+      security:
+      - cookieAuth: []
+
   /recipes/{recipeId}:
     get:
       tags:
@@ -292,4 +312,38 @@ components:
           type: boolean
           description: indication if the recipe is gluten free
           example: false
+    FamilyRecipe: 
+      type: object
+      properties: 
+        title:
+          type: string
+          description: recipe name
+          example: Sam's Couscous
+        image:
+          type: string
+          description: dish image
+          format: URL
+          example: https://assets.tmecosys.cn/image/upload/t_web767x639/img/recipe/ras/Assets/D3FE131E-EB10-46E8-9E93-5E178323751D/Derivates/A0B1EE28-94D2-4922-B871-CFB63832A281.jpg
+        readyInMinutes:
+          type: integer
+          description: the time takes to make this recipe
+          example: 32
+        creator:
+          type: string
+          description: The name and family role of the recipe creator
+          example : Uncle Sam
+        ingredients :
+          type: string 
+          description: All the ingredients of the recipe
+          example: Beef, coucous, tomato sauce 
+        instructions:
+          type: string
+          description: All the instructions for the recipe
+          example: 1.boil water, 2. add some salt and pepper
+        when: 
+        type: string
+        description: When is it customary to prepare the dish
+        example : Every Shavout eve meal. 
+        
+          
   
