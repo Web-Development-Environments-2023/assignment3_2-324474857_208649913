@@ -3,11 +3,6 @@ var router = express.Router();
 const DButils = require("./utils/DButils");
 const user_utils = require("./utils/user_utils");
 const recipe_utils = require("./utils/recipes_utils");
-const family_rec_uids = [2,3];
-
-function validateUserId(user_id, family_rec_uids) {
-  return family_rec_uids.includes(user_id);
-}
 
 
 /**
@@ -98,9 +93,6 @@ router.post('/my-recipes', async (req, res, next) => {
 router.get('/family-recipes', async (req,res,next) => {
   try{
     const user_id = req.session.user_id;
-    if(!validateUserId){
-      res.status(401).send('User is not authorized for family recipes');
-    }
     const query = `SELECT * from family_recipes where user_id = ${user_id}`;
     const family_recipes = await DButils.execQuery(query);
     res.status(200).send(family_recipes);
