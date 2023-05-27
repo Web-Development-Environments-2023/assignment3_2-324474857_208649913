@@ -4,8 +4,7 @@ GET /users/family-recipes
 Search - is external API 
 
 To Implement : 
-Recipes API need to add: Search Recipes
-Recipes API need to add: Get Random Recipes
-/ GET - Main page for a user 
-/users/family-recipes GET 
 
+
+ToDo Frontend: 
+On main page (requirement 6): present 3 last watched recipes using an array on the frontend
