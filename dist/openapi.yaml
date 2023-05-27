@@ -166,6 +166,21 @@ paths:
       security:
       - cookieAuth: []
 
+  /recipes:
+    get:
+      summary: Get random recipes, main page of the website
+      responses:
+        '200':
+          description: Successful retrieval of random recipes
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RecipePreview'
+        '500':
+          description: Internal server error
+
   /recipes/{recipeId}:
     get:
       tags:
@@ -190,6 +205,42 @@ paths:
                 $ref: '#/components/schemas/RecipePreview'
         "404":
           description: recipeId is not exists
+  /recipes/search:
+    get:
+      summary: Search for recipes
+      parameters:
+        - name: query
+          in: query
+          description: The (natural language) recipe search query.
+          required: true
+          schema:
+            type: string
+        - name: cuisine
+          in: query
+          description: The cuisine of the recipes. One or more, comma-separated (will be interpreted as 'OR').
+          schema:
+            type: string
+        - name: diet
+          in: query
+          description: The diet(s) for which the recipes must be suitable.
+          schema:
+            type: string
+        - name: intolerances
+          in: query
+          description: A comma-separated list of intolerances.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful search response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RecipePreview'
+        '400':
+          description: Invalid request parameters for the search
 components:
   schemas:
     User:
