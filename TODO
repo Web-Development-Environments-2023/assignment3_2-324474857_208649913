@@ -17,7 +17,7 @@ GET /users/favorites - working
 POST /users/favorites - working
 GET /users/my-recipes - working
 POST /users/my-recipes - working
-GET /users/family-recipes - 
+GET /users/family-recipes - working
 
 
 ToDo Backend : 
@@ -25,3 +25,23 @@ ToDo Backend :
 
 ToDo Frontend: 
 On main page (requirement 6): present 3 last watched recipes using an array on the frontend
+
+
+For eitan:
+
+- Remove the hardcoded env data ( env file doesnt work - trying to fix it) - spooncular api key and mysql data
+- generate this code to add familiy_recipes table
+
+CREATE TABLE family_recipes(  
+    id int NOT NULL PRIMARY KEY AUTO_INCREMENT COMMENT 'Primary Key',
+    owner VARCHAR(255),
+    user_id VARCHAR(255),
+    prepared_on VARCHAR(255),
+    ingredients VARCHAR(255),
+    preparation VARCHAR(255)
+
+) COMMENT '';
+
+
+INSERT INTO family_recipes (owner, user_id, prepared_on, ingredients, preparation)
+VALUES ('grandpa', '5', 'sukot', 'Tomatoes, onions, garlic', 'Chop the vegetables and sauté them in olive oil.');
