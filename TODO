@@ -13,15 +13,14 @@ POST /login -  working
 POST /logout - working
 
 Users: 
-GET /users/favorites - 
-POST /users/favorites - 
-GET /users/my-recipes - 
-POST /users/my-recipes - 
+GET /users/favorites - working
+POST /users/favorites - working
+GET /users/my-recipes - working
+POST /users/my-recipes - working
 GET /users/family-recipes - 
 
 
 ToDo Backend : 
-
 
 
 ToDo Frontend: 
