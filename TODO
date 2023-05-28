@@ -8,9 +8,9 @@ GET /recipes - Working
 GET /recipes/search - Working
 
 Auth: 
-POST /register -
-POST /login - 
-POST /logout - 
+POST /register - working
+POST /login -  working
+POST /logout - working
 
 Users: 
 GET /users/favorites - 

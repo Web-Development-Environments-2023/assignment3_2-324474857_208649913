@@ -39,19 +39,25 @@ router.post('/favorites', async (req,res,next) => {
 /**
  * This path returns the favorites recipes that were saved by the logged-in user
  */
-router.get('/favorites', async (req,res,next) => {
-  try{
+router.get('/favorites', async (req, res, next) => {
+  try {
     const user_id = req.session.user_id;
     let favorite_recipes = {};
     const recipes_id = await user_utils.getFavoriteRecipes(user_id);
     let recipes_id_array = [];
-    recipes_id.map((element) => recipes_id_array.push(element.recipe_id)); //extracting the recipe ids into array
-    const results = await recipe_utils.getRecipesPreview(recipes_id_array);
+    recipes_id.map((element) => recipes_id_array.push(element.recipe_id)); // extracting the recipe ids into an array
+
+    // Use Promise.all to wait for all async operations to complete
+    const results = await Promise.all(
+      recipes_id_array.map((recipe) => recipe_utils.getRecipeDetails(recipe))
+    );
+
     res.status(200).send(results);
-  } catch(error){
-    next(error); 
+  } catch (error) {
+    next(error);
   }
 });
+
 
 
 /**
