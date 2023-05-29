@@ -1,5 +1,6 @@
 const axios = require("axios");
 const api_domain = "https://api.spoonacular.com/recipes";
+const user_utils = require("./user_utils");
 
 
 /**
@@ -59,10 +60,10 @@ async function searchRecipes(query, cuisine, diet, intolerances, number) {
  * Get preview information of a recipe
  * @param {*} recipe_id - ID of the recipe
  */
-async function getRecipeDetails(recipe_id) {
+async function getRecipeDetails(recipe_id, user_id) {
   let recipe_info = await getRecipeInformation(recipe_id);
   let { id, title, readyInMinutes, image, aggregateLikes, vegan, vegetarian, glutenFree } = recipe_info.data;
-
+  let watched = await user_utils.getWatchedValue(recipe_id, user_id);
   return {
     id: id,
     title: title,
@@ -71,7 +72,8 @@ async function getRecipeDetails(recipe_id) {
     popularity: aggregateLikes,
     vegan: vegan,
     vegetarian: vegetarian,
-    glutenFree: glutenFree
+    glutenFree: glutenFree, 
+    watched: watched
   };
 }
 
@@ -79,11 +81,11 @@ async function getRecipeDetails(recipe_id) {
  * Get detailed information (more extensive than preview) of a recipe
  * @param {*} recipe_id - ID of the recipe
  */
-async function getFullRecipeDetails(recipe_id) {
+async function getFullRecipeDetails(recipe_id, user_id) {
   let recipe_info = await getRecipeInformation(recipe_id);
   let { id, title, readyInMinutes, image, aggregateLikes, vegan, vegetarian,
      glutenFree, extendedIngredients, servings, instructions} = recipe_info.data;
-
+  let watched = await user_utils.getWatchedValue(recipe_id, user_id);
   return {
     id: id,
     title: title,
@@ -95,7 +97,8 @@ async function getFullRecipeDetails(recipe_id) {
     glutenFree: glutenFree,
     servings: servings,
     extendedIngredients: extendedIngredients,
-    instructions: instructions
+    instructions: instructions,
+    watched: watched
   };
 }
 

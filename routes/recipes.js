@@ -3,14 +3,14 @@ var router = express.Router();
 const recipes_utils = require("./utils/recipes_utils");
 const DButils = require("./utils/DButils");
 
-
 router.get("/", async (req, res, next) => {
   try{
+    const user_id = req.session.user_id;
     // Get Random recipes and extract their ids
-    const randomRecipes = await recipes_utils.getRandomRecipes(3);
+    const randomRecipes = await recipes_utils.getRandomRecipes(1);
     const recipeIds = randomRecipes.data.recipes.map((recipe) => recipe.id);
     // Get only the relevant recipe details
-    const recipeDetails = await Promise.all(recipeIds.map((recipeId) => recipes_utils.getRecipeDetails(recipeId)));
+    const recipeDetails = await Promise.all(recipeIds.map((recipeId) => recipes_utils.getRecipeDetails(recipeId, user_id)));
     res.status(200).send(recipeDetails);
   }catch(error){
     next(error);
@@ -19,6 +19,7 @@ router.get("/", async (req, res, next) => {
 
 router.get('/search', async (req,res,next) => {
   try{
+    const user_id = req.session.user_id;
     const query = req.query.query;
     const intolerances = req.query.intolerances;
     const diet = req.query.diet;
@@ -27,7 +28,7 @@ router.get('/search', async (req,res,next) => {
     const search = await recipes_utils.searchRecipes(query, cuisine, diet, intolerances, number);
     const response = [];
     for(let i = 0 ;i<search.length; i++){
-      response.push(await recipes_utils.getFullRecipeDetails(search[i].id));
+      response.push(await recipes_utils.getFullRecipeDetails(search[i].id, user_id));
     }
     res.status(200).send(response);
   }catch(error){
@@ -62,7 +63,8 @@ router.post('/watched', async (req, res, next) => {
  */
 router.get("/:recipeId", async (req, res, next) => {
   try {
-    const recipe = await recipes_utils.getFullRecipeDetails(req.params.recipeId);
+    const user_id = req.session.user_id;
+    const recipe = await recipes_utils.getFullRecipeDetails(req.params.recipeId, user_id);
     res.send(recipe);
   } catch (error) {
     error.status = 404
