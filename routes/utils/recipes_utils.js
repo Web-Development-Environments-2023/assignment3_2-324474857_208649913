@@ -42,6 +42,7 @@ async function searchRecipes(query, cuisine, diet, intolerances, number) {
         query: query,
         cuisine: cuisine,
         diet: diet,
+        number: number,
         intolerances: intolerances,
         includeNutrition: false
       }

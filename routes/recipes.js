@@ -17,7 +17,8 @@ router.get('/search', async (req,res,next) => {
     const intolerances = req.query.intolerances;
     const diet = req.query.diet;
     const cuisine = req.query.cuisine;
-    const search = await recipes_utils.searchRecipes(query, cuisine, diet, intolerances);
+    const number = req.query.number;
+    const search = await recipes_utils.searchRecipes(query, cuisine, diet, intolerances, number);
     const response = [];
     for(let i = 0 ;i<search.length; i++){
       response.push(await recipes_utils.getRecipeDetails(search[i].id));
