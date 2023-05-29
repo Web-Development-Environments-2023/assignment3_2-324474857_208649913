@@ -21,6 +21,10 @@ GET /users/family-recipes - working
 
 
 ToDo Backend : 
+-add watched recipes table to db, user_id - recipe_id
+    show it recipe preview details 
+- add parameter how many recipes retrieved from search 5(default)/10/15
+
 
 
 ToDo Frontend: 
