@@ -1,6 +1,7 @@
 const axios = require("axios");
 const api_domain = "https://api.spoonacular.com/recipes";
 
+
 /**
  * Get recipe information by its ID
  * @param {*} recipe_id - ID of the recipe
