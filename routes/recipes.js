@@ -1,6 +1,8 @@
 var express = require("express");
 var router = express.Router();
 const recipes_utils = require("./utils/recipes_utils");
+const DButils = require("./utils/DButils");
+
 
 router.get("/", async (req, res, next) => {
   try{
@@ -30,6 +32,27 @@ router.get('/search', async (req,res,next) => {
     res.status(200).send(response);
   }catch(error){
     next(error);
+  }
+})
+
+router.post('/watched', async (req, res, next) => {
+  try{
+    const user_id = req.session.user_id;
+    const recipe_id = req.body.recipe_id;
+    const my_recipes = await DButils.execQuery(`SELECT * from watched_recipes where user_id = ${user_id} and recipe_id=${recipe_id}`);
+    if (my_recipes.length > 0){
+      res.status(200).send("recipe watched already");
+    }
+    else{
+      const query = 
+      `INSERT INTO watched_recipes (user_id, recipe_id)
+      VALUES (${user_id}, ${recipe_id})`
+      await DButils.execQuery(query);
+      res.status(201).send("recipe watched");
+    }
+   
+  }catch(error){
+    next(error)
   }
 })
 
