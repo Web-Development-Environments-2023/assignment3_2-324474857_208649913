@@ -24,7 +24,7 @@ paths:
       summary: A new user from the client is added to the server
       description: A JSON object contains all the details about the new user.
       requestBody:
-        description: Inventory item to add
+        description: User details to add
         content:
           application/json:
             schema:
@@ -33,8 +33,8 @@ paths:
       responses:
         "201":
           description: A new user has been added
-        "400":
-          description: wrong input parameters
+        "409":
+          description: User name already taken
   /login:
     post:
       tags:
@@ -206,7 +206,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/RecipePreview'
         "404":
-          description: recipeId is not exists
+          description: recipeId does not exists
   /recipes/search:
     get:
       tags:
@@ -234,6 +234,11 @@ paths:
           description: A comma-separated list of intolerances.
           schema:
             type: string
+        - name: number
+          in: query
+          description: Number of search results to show
+          schema:
+            type: integer
       responses:
         '200':
           description: Successful search response
