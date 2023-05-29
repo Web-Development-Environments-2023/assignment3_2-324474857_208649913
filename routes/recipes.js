@@ -7,7 +7,7 @@ router.get("/", async (req, res, next) => {
   try{
     const user_id = req.session.user_id;
     // Get Random recipes and extract their ids
-    const randomRecipes = await recipes_utils.getRandomRecipes(1);
+    const randomRecipes = await recipes_utils.getRandomRecipes(3);
     const recipeIds = randomRecipes.data.recipes.map((recipe) => recipe.id);
     // Get only the relevant recipe details
     const recipeDetails = await Promise.all(recipeIds.map((recipeId) => recipes_utils.getRecipeDetails(recipeId, user_id)));

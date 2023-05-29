@@ -185,6 +185,29 @@ paths:
         '500':
           description: Internal server error
 
+  /recipes/watched:
+    post:
+      tags:
+      - Recipes
+      summary: Add a recipe to the watched list of the user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                recipeId:
+                  type: integer
+                  description: ID of the recipe
+
+      responses:
+        '200':
+          description: Successful added recipe to watched list of the user
+        '500':
+          description: Internal server error
+
+
   /recipes/{recipeId}:
     get:
       tags:
