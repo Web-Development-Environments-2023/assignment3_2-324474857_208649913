@@ -4,8 +4,12 @@ const recipes_utils = require("./utils/recipes_utils");
 
 router.get("/", async (req, res, next) => {
   try{
+    // Get Random recipes and extract their ids
     const randomRecipes = await recipes_utils.getRandomRecipes(3);
-    res.status(200).send(randomRecipes.results);
+    const recipeIds = randomRecipes.data.recipes.map((recipe) => recipe.id);
+    // Get only the relevant recipe details
+    const recipeDetails = await Promise.all(recipeIds.map((recipeId) => recipes_utils.getRecipeDetails(recipeId)));
+    res.status(200).send(recipeDetails);
   }catch(error){
     next(error);
   }
