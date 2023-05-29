@@ -35,7 +35,7 @@ router.get('/search', async (req,res,next) => {
  */
 router.get("/:recipeId", async (req, res, next) => {
   try {
-    const recipe = await recipes_utils.getRecipeDetails(req.params.recipeId);
+    const recipe = await recipes_utils.getFullRecipeDetails(req.params.recipeId);
     res.send(recipe);
   } catch (error) {
     error.status = 404
