@@ -6,9 +6,6 @@ const bcrypt = require("bcrypt");
 
 router.post("/Register", async (req, res, next) => {
   try {
-    // parameters exist
-    // valid parameters
-    // username exists
     const user_details = {
       username: req.body.username,
       firstname: req.body.firstname,
