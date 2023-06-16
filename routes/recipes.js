@@ -22,7 +22,10 @@ router.get('/search', async (req,res,next) => {
     const user_id = req.session.user_id;
     const query = req.query.query;
     const number = 1 //req.query.number;
-    const search = await recipes_utils.searchRecipes(query,number);
+    const cuisines = req.query.cuisine;
+    const diets = req.query.diet;
+    const intolerences = req.query.intolerences;
+    const search = await recipes_utils.searchRecipes(query,cuisines,diets,intolerences,number);
     const response = [];
     for(let i = 0 ;i<search.length; i++){
       response.push(await recipes_utils.getFullRecipeDetails(search[i].id, user_id));
