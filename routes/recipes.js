@@ -66,7 +66,7 @@ router.post('/watched', async (req, res, next) => {
       const last_watched_recipes = await DButils.execQuery(`SELECT * from watched_recipes where user_id = ${user_id} ORDER BY record_id DESC LIMIT ${num_of_recipes}`);
       const response = [];
       for(let i = 0 ;i<last_watched_recipes.length; i++){
-        response.push(last_watched_recipes[i].recipe_id);
+        response.push(await recipes_utils.getRecipeDetails(last_watched_recipes[i].recipe_id, user_id, watched=true));
       }
       res.status(200).send(response);
     }catch(error){

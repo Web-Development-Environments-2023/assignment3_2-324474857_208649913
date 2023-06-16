@@ -60,11 +60,10 @@ async function searchRecipes(query, cuisine, diet, intolerances, number) {
  * Get preview information of a recipe
  * @param {*} recipe_id - ID of the recipe
  */
-async function getRecipeDetails(recipe_id, user_id) {
+async function getRecipeDetails(recipe_id, user_id, watched=false) {
   let recipe_info = await getRecipeInformation(recipe_id);
   let { id, title, readyInMinutes, image, aggregateLikes, vegan, vegetarian, glutenFree } = recipe_info.data;
-  let watched;
-  if (user_id != undefined){
+  if (user_id != undefined && !watched){
     watched = await user_utils.getWatchedValue(recipe_id, user_id);
   }
   return {
