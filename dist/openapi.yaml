@@ -206,6 +206,35 @@ paths:
           description: Successful added recipe to watched list of the user
         '500':
           description: Internal server error
+    get:
+      tags:
+      - Recipes
+      summary: Get the three most recently watched recipes by a specific user
+      parameters:
+        - name: userId
+          in: query
+          description: ID of the user
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successfully retrieved the three most recently watched recipes
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  recipeIds:
+                    type: array
+                    items:
+                      type: integer
+                    minItems: 3
+                    maxItems: 3
+                    description: Array of three recipe IDs
+        '500':
+          description: Internal server error
+
 
 
   /recipes/{recipeId}:
