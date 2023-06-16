@@ -54,6 +54,23 @@ router.post('/watched', async (req, res, next) => {
   }
 })
 
+// GET request to retrieve the three most recently watched recipes by a specific user
+// Response is an array of recipe_id sorted from latest to oldest. 
+  router.get('/watched',async (req, res, next) => {
+    try{
+      const user_id = req.session.user_id;
+      const num_of_recipes = 3;
+      const last_watched_recipes = await DButils.execQuery(`SELECT * from watched_recipes where user_id = ${user_id} ORDER BY record_id DESC LIMIT ${num_of_recipes}`);
+      const response = [];
+      for(let i = 0 ;i<last_watched_recipes.length; i++){
+        response.push(await recipes_utils.getRecipeDetails(last_watched_recipes[i].recipe_id, user_id, watched=true));
+      }
+      res.status(200).send(response);
+    }catch(error){
+      next(error)
+    }
+  });
+
 
 /**
  * This path returns a full details of a recipe by its id
