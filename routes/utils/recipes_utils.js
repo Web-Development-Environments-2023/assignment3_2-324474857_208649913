@@ -36,16 +36,13 @@ async function getRandomRecipes(number) {
  * @param {*} diet - Diet preference
  * @param {*} intolerances - Intolerances to consider
  */
-async function searchRecipes(query, cuisine, diet, intolerances, number) {
+async function searchRecipes(query, number) {
   try {
     const response = await axios.get(`${api_domain}/complexSearch`, {
       params: {
         apiKey: process.env.spoonacular_apiKey,
         query: query,
-        cuisine: cuisine,
-        diet: diet,
         number: number,
-        intolerances: intolerances,
         includeNutrition: false
       }
     });
