@@ -229,7 +229,7 @@ paths:
                     type: array
                     items:
                       type: integer
-                    minItems: 3
+                    minItems: 0
                     maxItems: 3
                     description: Array of three recipe IDs
         '500':
