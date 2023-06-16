@@ -24,7 +24,7 @@ router.get('/search', async (req,res,next) => {
     const intolerances = req.query.intolerances;
     const diet = req.query.diet;
     const cuisine = req.query.cuisine;
-    const number = 1 // req.query.number;
+    const number = 1 //req.query.number;
     const search = await recipes_utils.searchRecipes(query, cuisine, diet, intolerances, number);
     const response = [];
     for(let i = 0 ;i<search.length; i++){
@@ -61,10 +61,10 @@ router.post('/watched', async (req, res, next) => {
 /**
  * This path returns a full details of a recipe by its id
  */
-router.get("/info", async (req, res, next) => {
+router.get("/:recipeId", async (req, res, next) => {
   try {
     const user_id = req.session.user_id;
-    const recipeId = req.query.recipeId
+    const recipeId = req.params.recipeId
     const recipe = await recipes_utils.getFullRecipeDetails(recipeId, user_id);
     res.send(recipe);
   } catch (error) {
