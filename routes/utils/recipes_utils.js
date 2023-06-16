@@ -88,7 +88,10 @@ async function getFullRecipeDetails(recipe_id, user_id) {
   let recipe_info = await getRecipeInformation(recipe_id);
   let { id, title, readyInMinutes, image, aggregateLikes, vegan, vegetarian,
      glutenFree, extendedIngredients, servings, instructions} = recipe_info.data;
-  let watched = await user_utils.getWatchedValue(recipe_id, user_id);
+  let watched;
+  if (user_id != undefined){
+    watched = await user_utils.getWatchedValue(recipe_id, user_id);
+  }
   return {
     id: id,
     title: title,
