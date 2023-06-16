@@ -66,6 +66,10 @@ async function getRecipeDetails(recipe_id, user_id, watched=false) {
   if (user_id != undefined && !watched){
     watched = await user_utils.getWatchedValue(recipe_id, user_id);
   }
+  let favorite = false;
+  if (user_id != undefined){
+    favorite = await user_utils.getIsFavoriteValue(recipe_id, user_id);
+  }
   return {
     id: id,
     title: title,
@@ -75,7 +79,8 @@ async function getRecipeDetails(recipe_id, user_id, watched=false) {
     vegan: vegan,
     vegetarian: vegetarian,
     glutenFree: glutenFree, 
-    watched: watched
+    watched: watched,
+    favorite: favorite
   };
 }
 
@@ -91,6 +96,10 @@ async function getFullRecipeDetails(recipe_id, user_id) {
   if (user_id != undefined){
     watched = await user_utils.getWatchedValue(recipe_id, user_id);
   }
+  let favorite = false;
+  if (user_id != undefined){
+    favorite = await user_utils.getIsFavoriteValue(recipe_id, user_id);
+  }
   return {
     id: id,
     title: title,
@@ -100,10 +109,11 @@ async function getFullRecipeDetails(recipe_id, user_id) {
     vegan: vegan,
     vegetarian: vegetarian,
     glutenFree: glutenFree,
+    watched: watched,
+    favorite: favorite,
     servings: servings,
     extendedIngredients: extendedIngredients,
     instructions: instructions,
-    watched: watched
   };
 }
 

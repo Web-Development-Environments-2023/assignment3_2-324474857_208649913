@@ -37,12 +37,12 @@ app.get("/",function(req,res)
 
 });
 
-app.use(cors());
-app.options("*", cors());
+// app.use(cors());
+// app.options("*", cors());
 
 const corsConfig = {
   origin: true,
-  credentials: true
+  credentials: true,
 };
 
 app.use(cors(corsConfig));
