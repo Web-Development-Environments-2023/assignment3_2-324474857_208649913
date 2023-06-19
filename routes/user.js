@@ -81,13 +81,14 @@ Insert into my_recipes a new recipe that the looged in user created
 router.post('/my-recipes', async (req, res, next) => {
   try {
     const user_id = req.session.user_id;
-    const { title, image, readyInMinutes, vegetarian, vegan, glutenFree, servings, ingridients, instructions } = req.body;
+    const { title, image, readyInMinutes, vegetarian, vegan, glutenFree, servings, ingredients, instructions } = req.body;
     await DButils.execQuery(
-      `INSERT INTO my_recipes (user_id, title, image, readyInMinutes, vegetarian, vegan, glutenFree, servings, ingridients, instructions)
-      VALUES ('${user_id}', '${title}', '${image}', '${readyInMinutes}', ${vegetarian}, ${vegan}, ${glutenFree}, '${servings}','${ingridients}','${instructions}')`
+      `INSERT INTO my_recipes (user_id, title, image, readyInMinutes, vegetarian, vegan, glutenFree, servings, ingredients, instructions)
+      VALUES ('${user_id}', '${title}', '${image}', '${readyInMinutes}', ${vegetarian}, ${vegan}, ${glutenFree}, '${servings}','${ingredients}','${instructions}')`
     );
     res.sendStatus(201);
   } catch (error) {
+    console.log(error)
     next(error);
   }
 });
