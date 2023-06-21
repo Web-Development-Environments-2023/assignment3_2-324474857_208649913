@@ -1,0 +1,52 @@
+* Client requests gets directly to the main.js it is configured on 
+package.json file: there we can install all required packages
+install all packages:
+npm install dependencies from package
+
+* Code structure - 
+routing: 
+/register ----> in auth.js file
+/user ---> sends to user.js file 
+Inner level routing : 
+/user/favorites (will appear as /favorites in user.js) 
+
+Another level deeper : 
+Any database requests will be found in- /routes/utils folder of the project
+* DButils.execQuery is also a template method that connects to the DB and executes the query 
+
+MySql.js : 
+config variable data should be in file .env
+
+Express and axios framesworks returns Promises in a built-in mode
+
+* Most of the project will be wrapped with try and catch, (next() can be also useful)
+
+// Cookies = Session: 
+On Login : session.user_id will be user's id
+On logout : session will be reset 
+
+//Testing : 
+- Run locally and test using POSTMAN app
+    For example : POST request --> Body --> raw --> JSON format 
+    Postman only advantage over Swagger is that we can send requests to External API
+- Swagger: copy paste our api file to dist folder, save the template one for (favorites section, this is partial and we'll need to add paths)
+    when server is running : type in browser localhost address, and Swagger UI will open and will let you send requests 
+
+Reception hours: 
+*change to mysql2
+
+SQL needed DBs: 
+- favoriterecepies: user_id, recipe_id 
+- users: 
+
+* All the work is done currently locally.
+
+
+Clarification: 
+* user picture isn't really needed 
+* All requests should return in json format
+* Assignment score is evaluated by implementing all the paths required (openapi.yaml file)
+* recipe_id can be found on our DB and if not found we'll search external API, 
+consider - checking range of ids in spooncular 
+*  Family recipes can have only GET request after adding 3 of them 
+
