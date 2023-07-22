@@ -7,7 +7,7 @@ router.get("/", async (req, res, next) => {
   try{
     const user_id = req.session.user_id;
     // Get Random recipes and extract their ids
-    const randomRecipes = await recipes_utils.getRandomRecipes(1); //Change back to 3
+    const randomRecipes = await recipes_utils.getRandomRecipes(3);
     const recipeIds = randomRecipes.data.recipes.map((recipe) => recipe.id);
     // Get only the relevant recipe details
     const recipeDetails = await Promise.all(recipeIds.map((recipeId) => recipes_utils.getRecipeDetails(recipeId, user_id)));
@@ -21,7 +21,8 @@ router.get('/search', async (req,res,next) => {
   try{
     const user_id = req.session.user_id;
     const query = req.query.query;
-    const number = 1 //req.query.number;
+    // const number = 1;
+    const number = req.query.number;
     const cuisines = req.query.cuisine;
     const diets = req.query.diet;
     const intolerences = req.query.intolerences;
@@ -62,8 +63,8 @@ router.post('/watched', async (req, res, next) => {
   router.get('/watched',async (req, res, next) => {
     try{
       const user_id = req.session.user_id;
-      // const num_of_recipes = 3;
-      const num_of_recipes = 1;
+      const num_of_recipes = 3;
+      // const num_of_recipes = 1;
       const last_watched_recipes = await DButils.execQuery(`SELECT * from watched_recipes where user_id = ${user_id} ORDER BY record_id DESC LIMIT ${num_of_recipes}`);
       const response = [];
       for(let i = 0 ;i<last_watched_recipes.length; i++){
