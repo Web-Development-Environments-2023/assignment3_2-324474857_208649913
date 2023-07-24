@@ -1,0 +1,30 @@
+
+API Routes Status: 
+GET /alive - Working
+
+Recipes: 
+GET /recipes/{recipeId} - Working
+GET /recipes - Working
+GET /recipes/search - Working
+
+Auth: 
+POST /register - working
+POST /login -  working
+POST /logout - working
+
+Users: 
+GET /users/favorites - working
+POST /users/favorites - working
+GET /users/my-recipes - working
+POST /users/my-recipes - working
+GET /users/family-recipes - working
+
+
+ToDo Backend : 
+
+
+
+
+ToDo Frontend: 
+On main page (requirement 6): present 3 last watched recipes using an array on the frontend
+
